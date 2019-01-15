@@ -1,0 +1,25 @@
+import java.util.function.Function;
+import java.util.stream.Collectors;
+
+public class TestPalindromePermute {
+	
+	public static void main(String [] args){
+		
+		String inputText = "taco cat";
+		if(canMakePalindrom(inputText.replaceAll("\\s+", "")))
+			 System.out.println("Its a Palindrome");
+		
+	}
+	
+	private static boolean canMakePalindrom(String inputText) {
+	    return inputText.chars()
+	            .boxed()
+	            .collect(Collectors.groupingBy(Function.identity(),
+	                                           Collectors.counting()))
+	            .values()
+	            .stream()
+	            .filter(p -> p % 2 == 1)
+	            .count() <= 1;
+	}
+
+}
